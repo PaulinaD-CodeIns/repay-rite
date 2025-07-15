@@ -13,4 +13,4 @@ def main():
         print(f"\nYour monthly payment is: £{monthly_payment:,.2f}")
 
     except ValueError:
-        print("Please enter valid numeric values.")x
+        print("Please enter valid numeric values.")
