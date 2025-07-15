@@ -1,11 +1,10 @@
 from calculator import calculate_monthly_payment
 
 
-
-
 def main():
     print("Welcome to RepayRite!")
-    
+
+    print(f"\nYour monthly payment is: £{monthly_payment:,.2f}")
     
     principal = float(input("Enter the loan amount (Principal): £"))
     rate = float(input("Enter the annual interest rate (in %): "))
