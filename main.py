@@ -14,3 +14,6 @@ def main():
 
     except ValueError:
         print("Please enter valid numeric values.")
+
+if __name__ == "__main__":
+    main()
