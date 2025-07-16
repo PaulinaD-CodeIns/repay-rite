@@ -1,3 +1,10 @@
+# Styling imports and settings
+from colorama import init, Fore, Style
+from tabulate import tabulate
+
+init(autoreset=True)
+
+# Math imports
 from calculator import (
     calculate_monthly_payment,
     calculate_total_repayment,
@@ -9,6 +16,7 @@ from calculator import (
 
 # Second section - extra monthly payments and their effect
 def handle_extra_payments(principal, annual_interest_rate, loan_term_years, monthly_payment, total_repayment):
+    print(Fore.YELLOW + Style.BRIGHT + "\n=== EXTRA PAYMENTS ===")
     extra = input(
         "Are you aware that not all mortgage lenders allow extra monthly payments without conditions, "
         "and some require permission or specific contract terms? Would you still like to explore this option? (yes/no): "
@@ -24,22 +32,26 @@ def handle_extra_payments(principal, annual_interest_rate, loan_term_years, mont
             years = results["new_months"] // 12
             months = results["new_months"] % 12
 
-            print("\nWITH EXTRA PAYMENTS:")
-            print(f"New Monthly Payment (including extra): £{results['actual_monthly_outgoing']:,.2f}")
-            print(f"New Loan Term: {results['new_months']} months ({years} years and {months} months)")
-            print(f"Total Payment with Extra: £{results['total_paid']:,.2f}")
-            print(f"Interest Saved: £{results['interest_saved']:,.2f}")
+            extra_table = [
+                ["New Monthly Payment (incl. extra)", f"£{results['actual_monthly_outgoing']:,.2f}"],
+                ["New Loan Term", f"{results['new_months']} months ({years} yrs, {months} mos)"],
+                ["Total Payment with Extra", f"£{results['total_paid']:,.2f}"],
+                ["Interest Saved", f"£{results['interest_saved']:,.2f}"]
+            ]
+
+            print(Fore.GREEN + "\nWITH EXTRA PAYMENTS:")
+            print(tabulate(extra_table, headers=["Metric", "Value"], tablefmt="fancy_grid"))
 
         except ValueError:
-            print("Invalid input for extra payments.")
+            print(Fore.RED + "Invalid input for extra payments.")
     else:
-        print("No extra payments applied.")
+        print(Fore.BLUE + "No extra payments applied.")
 
 
 # Third section - refinancing simulation
 def handle_refinancing(principal, original_total_repayment):
     try:
-        print("\nREFINANCING SIMULATION:")
+        print(Fore.MAGENTA + Style.BRIGHT + "\n=== REFINANCING SIMULATION ===")
         new_rate = float(input("Enter the new annual interest rate (in %): "))
         new_term = int(input("Enter the new loan term in years: "))
 
@@ -47,23 +59,27 @@ def handle_refinancing(principal, original_total_repayment):
             principal, new_rate, new_term, original_total_repayment
         )
 
-        print("\nRESULTS OF REFINANCING:")
-        print(f"New Monthly Payment: £{results['new_monthly_payment']:,.2f}")
-        print(f"New Total Repayment: £{results['new_total_repayment']:,.2f}")
-        print(f"New Total Interest: £{results['new_total_interest']:,.2f}")
+        refinance_table = [
+            ["New Monthly Payment", f"£{results['new_monthly_payment']:,.2f}"],
+            ["New Total Repayment", f"£{results['new_total_repayment']:,.2f}"],
+            ["New Total Interest", f"£{results['new_total_interest']:,.2f}"]
+        ]
+
+        print(Fore.CYAN + "\nRESULTS OF REFINANCING:")
+        print(tabulate(refinance_table, headers=["Description", "Amount"], tablefmt="fancy_grid"))
 
         if results["interest_difference"] > 0:
-            print(f"You would save £{results['interest_difference']:,.2f} in interest compared to your original plan.")
+            print(Fore.GREEN + f"\nYou would save £{results['interest_difference']:,.2f} in interest compared to your original plan.")
         else:
-            print(f"This refinancing would cost you an extra £{abs(results['interest_difference']):,.2f} in interest.")
+            print(Fore.RED + f"\nThis refinancing would cost you an extra £{abs(results['interest_difference']):,.2f} in interest.")
 
     except ValueError:
-        print("Invalid input. Please enter numeric values.")
+        print(Fore.RED + "Invalid input. Please enter numeric values.")
 
 
 # First section - basic mortgage calculation
 def main():
-    print("Welcome to RepayRite!")
+    print(Fore.BLUE + Style.BRIGHT + "\n💰 Welcome to RepayRite - Your Mortgage Repayment Companion! 💰")
 
     try:
         principal = float(input("Enter the loan amount (Principal): £"))
@@ -74,9 +90,14 @@ def main():
         total_repayment = calculate_total_repayment(monthly_payment, loan_term_years)
         total_interest = calculate_total_interest(total_repayment, principal)
 
-        print(f"\nYour monthly payment is: £{monthly_payment:,.2f}")
-        print(f"Total repayment over {loan_term_years} years: £{total_repayment:,.2f}")
-        print(f"Total interest paid: £{total_interest:,.2f}")
+        summary_table = [
+            ["Monthly Payment", f"£{monthly_payment:,.2f}"],
+            [f"Total Repayment ({loan_term_years} years)", f"£{total_repayment:,.2f}"],
+            ["Total Interest Paid", f"£{total_interest:,.2f}"]
+        ]
+
+        print(Fore.CYAN + Style.BRIGHT + "\n=== YOUR MORTGAGE SUMMARY ===")
+        print(tabulate(summary_table, headers=["Description", "Amount"], tablefmt="fancy_grid"))
 
         # Extra payments section
         extra_section = input(
@@ -96,10 +117,10 @@ def main():
         if refinance_section == "yes":
             handle_refinancing(principal, total_repayment)
 
-        print("\nThank you for using RepayRite. Goodbye!")
+        print(Fore.MAGENTA + Style.BRIGHT + "\nThank you for using RepayRite! We wish you smart and stress-free repayments. 💼")
 
     except ValueError:
-        print("Please enter valid numeric values.")
+        print(Fore.RED + "Please enter valid numeric values.")
 
 
 if __name__ == "__main__":
