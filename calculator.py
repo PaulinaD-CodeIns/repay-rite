@@ -43,3 +43,17 @@ def calculate_impact_of_extra_payments(principal, annual_interest_rate, loan_ter
         "total_paid": total_paid,
         "interest_saved": interest_saved
     }
+
+
+def simulate_refinancing(principal, new_interest_rate, new_loan_term_years, original_total_repayment):
+    new_monthly_payment = calculate_monthly_payment(principal, new_interest_rate, new_loan_term_years)
+    new_total_repayment = calculate_total_repayment(new_monthly_payment, new_loan_term_years)
+    new_total_interest = calculate_total_interest(new_total_repayment, principal)
+    interest_difference = original_total_repayment - new_total_repayment
+
+    return {
+        "new_monthly_payment": new_monthly_payment,
+        "new_total_repayment": new_total_repayment,
+        "new_total_interest": new_total_interest,
+        "interest_difference": interest_difference
+    }
