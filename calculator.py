@@ -1,5 +1,3 @@
-#All the calculations, keeping math seperate to it's easier to amend.
-
 def calculate_monthly_payment(principal, annual_interest_rate, loan_term_years):
     monthly_interest_rate = annual_interest_rate / 100 / 12
     number_of_payments = loan_term_years * 12
@@ -18,3 +16,30 @@ def calculate_total_repayment(monthly_payment, loan_term_years):
 
 def calculate_total_interest(total_repayment, principal):
     return total_repayment - principal
+
+
+def calculate_impact_of_extra_payments(principal, annual_interest_rate, loan_term_years, extra_payment):
+    monthly_payment = calculate_monthly_payment(principal, annual_interest_rate, loan_term_years)
+    monthly_interest_rate = annual_interest_rate / 100 / 12
+    balance = principal
+    total_paid = 0
+    months = 0
+
+    while balance > 0:
+        interest = balance * monthly_interest_rate
+        principal_paid = (monthly_payment + extra_payment) - interest
+        if principal_paid <= 0:
+            break
+        balance -= principal_paid
+        total_paid += (monthly_payment + extra_payment)
+        months += 1
+
+    total_without_extra = monthly_payment * loan_term_years * 12
+    interest_saved = total_without_extra - total_paid
+
+    return {
+        "actual_monthly_outgoing": monthly_payment + extra_payment,
+        "new_months": months,
+        "total_paid": total_paid,
+        "interest_saved": interest_saved
+    }
