@@ -26,6 +26,7 @@ RepayRite is a command-line mortgage calculator designed to help users easily un
 - [Contact](#contact)
 
 
+![Main View of the CLI](assets/images/readme/mainview.png)
 
 ---
 
@@ -82,6 +83,8 @@ The primary goal of **RepayRite** is to support users in understanding and manag
   
 - **Tabular Output**: The `tabulate` library formats key financial figures into clean, easy-to-read tables using the `fancy_grid` style, enhancing readability.
 
+- **Emoji Use**: Relevant emojis are incorporated during the welcome and goodbye messages to add personality and enhance user engagement, maintaining consistency throughout the interaction.
+
 - **Whitespace & Sectioning**: Clear separation between input sections and results improves the flow of interaction, preventing cognitive overload.
 
 - **Minimal Input, Maximum Clarity**: Users are only asked for essential inputs (e.g., loan amount, interest rate, term). Complex results are computed and displayed clearly, without requiring users to interpret raw math.
@@ -93,6 +96,8 @@ The primary goal of **RepayRite** is to support users in understanding and manag
 
 This approach ensures RepayRite delivers a smooth user experience, even in a non-graphical environment.
 
+
+
 ---
 ## Features
 
@@ -103,15 +108,23 @@ RepayRite includes multiple core features designed to help users better understa
 - **Monthly Repayment Calculator**
   - Calculates standard monthly repayments based on user input (loan amount, interest rate, and term).
   - Displays monthly payment, total repayment, and total interest in a formatted table.
+  - The monthly mortgage repayment is calculated using the standard formula used by financial institutions:
+ ![Formula](assets/images/readme/formula.png)
+
+![Monthly Calculations](assets/images/readme/monthlycalc.png)
 
 - **Extra Monthly Payment Simulation**
   - Allows users to simulate how paying more each month can reduce the loan term and total interest paid.
   - Provides warnings that some lenders may require permission for extra payments.
   - Outputs updated repayment figures in a clearly tabulated format.
 
+![Extra Payments Calculations](assets/images/readme/extrapymtcalc.png)
+
 - **Refinancing Simulation**
   - Lets users enter a new interest rate and/or loan term to simulate refinancing scenarios.
   - Compares new repayment values to the original plan, highlighting potential savings or extra costs.
+
+  ![Refinance Calculations](assets/images/readme/refinancecalc.png)
 
 - **Clear Output and Styling**
   - Uses `colorama` for color-coded output to highlight warnings, savings, and key information.
@@ -123,7 +136,6 @@ RepayRite includes multiple core features designed to help users better understa
 
 - **Reusable Design**
     - Functions are modular and separated in `calculator.py` for easy maintenance or expansion.
-    
     - Easy to extend the app with future enhancements like overpayment limits or early exit fees.
 
 ### User Journey
@@ -191,6 +203,8 @@ RepayRite was built using a range of tools and technologies to support clean, mo
   Used to style terminal output with colors and emphasis for better user experience.
 - **[Tabulate](https://pypi.org/project/tabulate/)**  
   Used to format data into visually appealing tables in the console.
+
+![Requirements](assets/images/readme/requirements.png)
 
 ### APIs
 - **None used**  
