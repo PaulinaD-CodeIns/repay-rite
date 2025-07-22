@@ -267,8 +267,21 @@ Overall, these testing efforts helped refine the application, improve user exper
 ---
 ## Deployment
 
-### Local Deployment
+#### Running the Application on Heroku
 
+This project is a command-line Python application and does not use a web framework like Flask or Django. Therefore, it is not intended to display content via a web browser.
+
+To run the application on Heroku, use the Heroku CLI with the following command:
+
+`heroku run python main.py --app repayrite-mortgage-calculator`
+
+This will start the CLI-based mortgage calculator in the Heroku terminal environment, as intended.
+
+If you encounter an "Application Error" when visiting the .herokuapp.com URL, this is expected — the app is not built for web rendering. All interaction occurs through the terminal when using the above command.
+
+If you have any issues running the app, please feel free to run it locally by following the Local Deployment instructions below.
+
+### Local Deployment
 
 **Preperation and Requirements:**
 
@@ -304,32 +317,6 @@ To run the project locally, follow these steps:
   `python main.py`
 
 The application will launch in your terminal and guide you through mortgage repayment calculations using a CLI interface.
-
----
-### GitHub Deployment (via Heroku)
-
-This project has been deployed to Heroku using GitHub integration.
-
-#### GitHub Preparation
-
-You will need:
-
-- A free GitHub account  
-- A free Heroku account  
-
-#### Heroku Deployment Instructions
-
-- Push your complete, working code to GitHub in a public repository:  
-  https://github.com/PaulinaD-CodeIns/repay-rite
-
-- Log into your Heroku Dashboard.
-
-- Click **New** → **Create New App**, and give it a unique name (e.g., `repayrite-calculator`).
-
-- Under **Deployment Method**, choose **GitHub** and connect it to your repository:  
-  `PaulinaD-CodeIns/repay-rite`
-
-- Enable **Automatic Deploys** (optional), or manually deploy the branch of your choice.
 
 ---
 ### Credits
